@@ -30,7 +30,7 @@ export default function EventDetailPage({
             Wróć do listy
           </button>
         </main>
-        <BottomNav activeTab="search" />
+        <BottomNav />
       </div>
     )
   }
@@ -58,12 +58,12 @@ export default function EventDetailPage({
   const actions = mockEventHubActions(event.id)
 
   return (
-    <div className="bg-geometric min-h-screen bg-background pb-24 lg:pb-8">
+    <div className="min-h-screen bg-background pb-24 lg:pb-8">
       <Header />
       <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:pt-16 pt-5">
         <EventHub event={hubEvent} actions={actions} onBack={() => router.push("/zawody")} />
       </main>
-      <BottomNav activeTab="search" />
+      <BottomNav />
     </div>
   )
 }

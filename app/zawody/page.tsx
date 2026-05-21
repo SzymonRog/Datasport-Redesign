@@ -4,40 +4,67 @@ import { Header } from "@/components/dashboard/header"
 import { PromotedEvents } from "@/components/dashboard/promoted-events"
 import { EventCard } from "@/components/dashboard/event-card"
 import { RaceSearchBar } from "@/components/dashboard/race-search-bar"
+import { RaceFilters, type SortOption } from "@/components/dashboard/race-filters"
 import { BottomNav } from "@/components/dashboard/bottom-nav"
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { mockEvents } from "@/lib/mock-data"
 
-interface Event {
-  id: number
-  name: string
-  location: string
-  date: string
-  startTime: string
-  participants: number
-  spotsLeft: number
-  image: string
-  distances: string[]
+const POLISH_MONTHS: Record<string, number> = {
+  stycznia: 0, lutego: 1, marca: 2, kwietnia: 3, maja: 4, czerwca: 5,
+  lipca: 6, sierpnia: 7, września: 8, października: 9, listopada: 10, grudnia: 11,
 }
+
+function parsePolishDate(dateStr: string): Date {
+  const [day, monthStr, year] = dateStr.split(" ")
+  return new Date(parseInt(year), POLISH_MONTHS[monthStr] ?? 0, parseInt(day))
+}
+
+const ALL_DISTANCES = Array.from(new Set(mockEvents.flatMap((e) => e.distances)))
 
 export default function ZawodyPage() {
   const [searchTerm, setSearchTerm] = useState("")
+  const [sortBy, setSortBy] = useState<SortOption>("date")
+  const [selectedDistances, setSelectedDistances] = useState<string[]>([])
 
-  const filteredEvents = mockEvents.filter((event) => {
-    const matchesSearch =
-      event.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      event.location.toLowerCase().includes(searchTerm.toLowerCase())
+  const toggleDistance = (distance: string) => {
+    setSelectedDistances((prev) =>
+      prev.includes(distance) ? prev.filter((d) => d !== distance) : [...prev, distance]
+    )
+  }
 
-    return matchesSearch
-  })
+  const filteredEvents = useMemo(() => {
+    let events = mockEvents.filter((event) => {
+      const matchesSearch =
+        !searchTerm ||
+        event.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        event.location.toLowerCase().includes(searchTerm.toLowerCase())
+
+      const matchesDistance =
+        selectedDistances.length === 0 ||
+        event.distances.some((d) => selectedDistances.includes(d))
+
+      return matchesSearch && matchesDistance
+    })
+
+    if (sortBy === "date") {
+      events = [...events].sort(
+        (a, b) => parsePolishDate(a.date).getTime() - parsePolishDate(b.date).getTime()
+      )
+    } else {
+      events = [...events].sort((a, b) => b.participants - a.participants)
+    }
+
+    return events
+  }, [searchTerm, selectedDistances, sortBy])
 
   const handleSignUp = (id: number) => {
     console.log("Signing up for event:", id)
-    // In real app, this would make an API call
   }
 
+  const hasActiveFilters = searchTerm.length > 0 || selectedDistances.length > 0
+
   return (
-    <div className="bg-geometric min-h-screen bg-background pb-24 lg:pb-8">
+    <div className="min-h-screen bg-background pb-24 lg:pb-8">
       <Header />
 
       <main className="mx-auto max-w-7xl px-4 py-6 sm:py-3 sm:px-6 lg:px-8">
@@ -46,12 +73,22 @@ export default function ZawodyPage() {
           <PromotedEvents />
         </section>
 
-        {/* Search */}
-        <div className="mb-6">
-          <RaceSearchBar
-            value={searchTerm}
-            onChange={setSearchTerm}
-            placeholder="Szukaj zawodów..."
+        {/* Search + Filters — unified toolbar */}
+        <div className="mb-6 flex items-center gap-2">
+          <div className="min-w-0 flex-1">
+            <RaceSearchBar
+              value={searchTerm}
+              onChange={setSearchTerm}
+              placeholder="Szukaj zawodów..."
+            />
+          </div>
+          <RaceFilters
+            sortBy={sortBy}
+            onSortChange={setSortBy}
+            availableDistances={ALL_DISTANCES}
+            selectedDistances={selectedDistances}
+            onDistanceToggle={toggleDistance}
+            onClearDistances={() => setSelectedDistances([])}
           />
         </div>
 
@@ -86,8 +123,8 @@ export default function ZawodyPage() {
                 Nie znaleziono zawodów
               </h3>
               <p className="mt-2 text-sm text-muted-foreground text-center">
-                {searchTerm
-                  ? `Brak wyników dla "${searchTerm}". Spróbuj innego zapytania.`
+                {hasActiveFilters
+                  ? "Spróbuj zmienić filtry lub inne zapytanie."
                   : "Brak dostępnych zawodów w tej chwili."}
               </p>
             </div>
@@ -95,7 +132,7 @@ export default function ZawodyPage() {
         </section>
       </main>
 
-      <BottomNav activeTab="search" />
+      <BottomNav />
     </div>
   )
 }

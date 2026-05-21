@@ -33,23 +33,23 @@ export function StatsOverview() {
       </div>
 
       <div className="space-y-3 p-4">
-        <div className="flex items-center gap-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 p-4 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800 ring-1 ring-border shadow-md">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-50 dark:bg-red-950/30 text-red-600">
+        <div className="flex items-center gap-4 rounded-xl bg-muted/50 p-4 transition-colors hover:bg-muted ring-1 ring-border">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
             <Trophy className="h-6 w-6" />
           </div>
           <div>
-            <p className="text-sm font-medium text-muted-foreground">Ukończone zawody</p>
-            <p className="text-2xl font-display font-bold text-foreground">12</p>
+            <p className="text-sm text-muted-foreground">Ukończone zawody</p>
+            <p className="text-2xl font-bold text-foreground">12</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 p-4 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800 ring-1 ring-border shadow-md">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-50 dark:bg-red-950/30 text-red-600">
+        <div className="flex items-center gap-4 rounded-xl bg-muted/50 p-4 transition-colors hover:bg-muted ring-1 ring-border">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
             <Timer className="h-6 w-6" />
           </div>
           <div>
-            <p className="text-sm font-medium text-muted-foreground">Aktywne starty</p>
-            <p className="text-2xl font-display font-bold text-foreground">2</p>
+            <p className="text-sm text-muted-foreground">Aktywne starty</p>
+            <p className="text-2xl font-bold text-foreground">2</p>
           </div>
         </div>
       </div>

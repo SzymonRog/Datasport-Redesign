@@ -9,12 +9,12 @@ export function ProfileCard() {
       
       <div className="relative px-6 pb-6 text-center">
         {/* Avatar */}
-        <div className="mx-auto -mt-12 mb-4 flex h-24 w-24 items-center justify-center rounded-full border-4 border-white dark:border-zinc-950 bg-zinc-100 dark:bg-zinc-800 shadow-md transition-transform hover:scale-105">
-          <User className="h-10 w-10 text-zinc-400 dark:text-zinc-500" />
+        <div className="mx-auto -mt-12 mb-4 flex h-24 w-24 items-center justify-center rounded-full border-4 border-card bg-muted shadow-md transition-transform hover:scale-105">
+          <User className="h-10 w-10 text-muted-foreground" />
         </div>
 
         {/* Info */}
-        <h2 className="text-2xl font-display font-bold text-foreground leading-tight">Szymon Rogala</h2>
+        <h2 className="text-xl font-semibold text-foreground leading-tight">Szymon Rogala</h2>
         <p className="mt-1 flex items-center justify-center gap-1 text-sm font-medium text-muted-foreground">
           <MapPin className="h-3 w-3" />
           Wielka Lipa
@@ -36,11 +36,11 @@ export function ProfileCard() {
 
 function StatItem({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
-    <div className={`rounded-xl p-3 text-center transition-colors ${highlight ? "bg-red-50 dark:bg-red-950/30 ring-1 ring-red-100 dark:ring-red-900/50" : "bg-zinc-50 dark:bg-zinc-900/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 ring-1 ring-border shadow-md"}`}>
-      <p className={`text-xl font-display font-bold ${highlight ? "text-red-600" : "text-foreground"}`}>
+    <div className={`rounded-xl p-3 text-center transition-colors ${highlight ? "bg-primary/10 ring-1 ring-primary/20" : "bg-muted/50 hover:bg-muted ring-1 ring-border"}`}>
+      <p className={`text-xl font-bold ${highlight ? "text-primary" : "text-foreground"}`}>
         {value}
       </p>
-      <p className="text-xs font-medium text-muted-foreground mt-1">{label}</p>
+      <p className="text-xs text-muted-foreground mt-1">{label}</p>
     </div>
   )
 }

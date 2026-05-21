@@ -88,7 +88,7 @@ function TabButton({
   return (
     <button
       onClick={onClick}
-      className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+      className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
         active
           ? "bg-primary text-primary-foreground"
           : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
@@ -123,15 +123,15 @@ function ActivityCard({ activity }: { activity: typeof activities[0] }) {
 
         {/* Actions */}
         <div className="flex items-center gap-4 border-t border-border pt-4">
-          <button className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-primary">
+          <button className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-primary rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
             <Heart className="h-4 w-4" />
             <span>{activity.likes || "Lubię"}</span>
           </button>
-          <button className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-primary">
+          <button className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-primary rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
             <MessageCircle className="h-4 w-4" />
             <span>{activity.comments || "Komentarz"}</span>
           </button>
-          <button className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-primary">
+          <button className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-primary rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
             <Share2 className="h-4 w-4" />
             <span>Udostępnij</span>
           </button>

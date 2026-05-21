@@ -6,18 +6,25 @@ import { Calendar, MapPin, Users, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Event } from "@/lib/mock-data"
 
+import { use } from "react"
+import { useRouter } from "next/navigation"
+
 interface EventCardProps {
   event: Event
   onSignUp?: (id: number) => void
 }
 
+
 export function EventCard({ event, onSignUp }: EventCardProps) {
+  const router = useRouter()
   const isAlmostFull = event.spotsLeft < 100
 
   const handleSignUpClick = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
     onSignUp?.(event.id)
+
+    router.push(`/zawody/${event.id}`) // Navigate to the sign-up page
   }
 
   return (
@@ -42,7 +49,7 @@ export function EventCard({ event, onSignUp }: EventCardProps) {
                 {event.name}
               </h3>
               {isAlmostFull && (
-                <span className="flex-shrink-0 rounded-full bg-red-50 dark:bg-red-950/30 px-2 py-0.5 text-[10px] font-bold text-red-600 whitespace-nowrap">
+                <span className="flex-shrink-0 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold text-primary whitespace-nowrap">
                   {event.spotsLeft} miejsc
                 </span>
               )}
@@ -67,7 +74,7 @@ export function EventCard({ event, onSignUp }: EventCardProps) {
                   {event.distances.map((distance) => (
                     <span
                       key={distance}
-                      className="rounded-md bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 text-[10px] font-semibold text-zinc-500 dark:text-zinc-400"
+                      className="rounded-md bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground"
                     >
                       {distance}
                     </span>

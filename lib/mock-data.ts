@@ -70,6 +70,7 @@ export type UserRace = {
   daysUntil: number
   status: UserRaceStatus
   cover: string
+  participantName?: string
 }
 
 // Pricing tiers — defined before mockEvents so they can be referenced inline
@@ -335,6 +336,7 @@ export const mockUserRaces: UserRace[] = [
     daysUntil: 2,
     status: "confirmed",
     cover: "/images/races/marconi-duathlon.png",
+    participantName: "Szymon Rogala",
   },
   {
     id: 2, // mockEvents id 2: Sowi Bieg 2026
@@ -348,6 +350,7 @@ export const mockUserRaces: UserRace[] = [
     daysUntil: 5,
     status: "confirmed",
     cover: "/images/races/sowi-bieg.png",
+    participantName: "Szymon Rogala",
   },
   {
     id: 3, // mockEvents id 3: Triplet Leśny
@@ -361,6 +364,7 @@ export const mockUserRaces: UserRace[] = [
     daysUntil: 19,
     status: "pending_payment",
     cover: "/images/races/triplet-lesny.png",
+    participantName: "Szymon Rogala",
   },
   {
     id: 8, // mockEvents id 8: Bike Maraton Kids
@@ -374,6 +378,7 @@ export const mockUserRaces: UserRace[] = [
     daysUntil: 25,
     status: "confirmed",
     cover: "/images/races/bike-maraton.png",
+    participantName: "Szymon Rogala",
   },
   {
     id: 9, // mockEvents id 9: Rudawy Wiosenny Festiwal
@@ -387,6 +392,7 @@ export const mockUserRaces: UserRace[] = [
     daysUntil: 32,
     status: "confirmed",
     cover: "/images/races/rudawy-festiwal.png",
+    participantName: "Szymon Rogala",
   },
 ]
 

@@ -6,18 +6,14 @@ import { MapPin, Calendar, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import useEmblaCarousel from "embla-carousel-react"
 import { useCallback } from "react"
-import { mockEvents } from "@/lib/mock-data"
+import { mockEvents, type Event } from "@/lib/mock-data"
+import { getTopRecommendationBadge, type BadgeType } from "@/lib/recommendations"
 
-interface Event {
-  id: number
-  name: string
-  location: string
-  date: string
-  startTime: string
-  participants: number
-  spotsLeft: number
-  image: string
-  distances: string[]
+const badgeConfig: Record<BadgeType, string> = {
+  "last-year": "bg-amber-400 text-amber-950",
+  "near-you": "bg-sky-400 text-sky-950",
+  popular: "bg-rose-400 text-rose-950",
+  recommended: "bg-white/90 text-zinc-800",
 }
 
 export function PromotedEvents() {
@@ -77,6 +73,8 @@ export function PromotedEvents() {
 }
 
 function PromotedEventCard({ event }: { event: Event }) {
+  const badge = getTopRecommendationBadge(event)
+
   return (
     <article className="group flex w-[260px] flex-shrink-0 cursor-pointer flex-col overflow-hidden rounded-2xl bg-card shadow-lg ring-1 ring-border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
       <div className="relative aspect-[4/3] overflow-hidden bg-muted">
@@ -86,6 +84,14 @@ function PromotedEventCard({ event }: { event: Event }) {
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
+
+        {/* Recommendation Badge */}
+        {badge && (
+          <span className={`absolute top-2.5 left-2.5 rounded-full px-2.5 py-1 text-[11px] font-bold tracking-wide shadow-md ${badgeConfig[badge.type]}`}>
+            {badge.label}
+          </span>
+        )}
+
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3">
           <h3 className="text-sm font-bold text-white">{event.name}</h3>
           <div className="flex items-center gap-1 text-xs text-white/80">

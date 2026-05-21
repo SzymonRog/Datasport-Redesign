@@ -6,43 +6,13 @@ import { ArrowLeft, Calendar, MapPin, User, Download, Share2, QrCode } from "luc
 import { Button } from "@/components/ui/button"
 import { Header } from "@/components/dashboard/header"
 import { BottomNav } from "@/components/dashboard/bottom-nav"
-
-const myRaces = [
-  {
-    id: 1,
-    name: "Dziecięcy Bieg Po Zdrowie",
-    location: "Nowiny",
-    date: "30 maja 2026",
-    startTime: "11:00",
-    startNumber: "156",
-    category: "Dzieci 10-12 lat",
-    distance: "2 km",
-    daysUntil: 17,
-    status: "confirmed",
-    cover: "/images/races/bike-maraton.png",
-    participantName: "Szymon Kowalski",
-  },
-  {
-    id: 2,
-    name: "12. PKO Cracovia Półmaraton Królewski",
-    location: "Kraków",
-    date: "11 października 2026",
-    startTime: "12:00",
-    startNumber: "2847",
-    category: "M30",
-    distance: "21.1 km",
-    daysUntil: 151,
-    status: "confirmed",
-    cover: "/images/races/marconi-duathlon.png",
-    participantName: "Szymon Kowalski",
-  },
-]
+import { mockUserRaces } from "@/lib/mock-data"
 
 export default function TicketPage() {
   const params = useParams()
   const router = useRouter()
   const raceId = Number(params.id)
-  const race = myRaces.find((r) => r.id === raceId)
+  const race = mockUserRaces.find((r) => r.id === raceId && r.status !== "cancelled")
 
   if (!race) {
     return (
@@ -79,8 +49,8 @@ export default function TicketPage() {
           <div className="bg-primary p-6 text-white">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold uppercase tracking-wider opacity-80">Bilet na zawody</span>
-              <div className="rounded-full bg-white/20 px-3 py-1 text-[10px] font-bold">
-                POTWIERDZONO
+              <div className={`rounded-full px-3 py-1 text-[10px] font-bold ${race.status === "pending_payment" ? "bg-amber-400/30 text-amber-100" : "bg-white/20"}`}>
+                {race.status === "pending_payment" ? "OCZEKUJE NA PŁATNOŚĆ" : "POTWIERDZONO"}
               </div>
             </div>
             <h1 className="mt-4 text-2xl font-display font-bold leading-tight">
@@ -117,7 +87,7 @@ export default function TicketPage() {
           {/* Bottom Section - Details */}
           <div className="p-8">
             <div className="grid grid-cols-2 gap-y-6">
-              <DetailItem label="Zawodnik" value={race.participantName} icon={<User className="h-3.5 w-3.5" />} />
+              <DetailItem label="Zawodnik" value={race.participantName ?? "—"} icon={<User className="h-3.5 w-3.5" />} />
               <DetailItem label="Dystans" value={race.distance} icon={<MapPin className="h-3.5 w-3.5" />} />
               <DetailItem label="Data" value={race.date} icon={<Calendar className="h-3.5 w-3.5" />} />
               <DetailItem label="Kategoria" value={race.category} icon={<Info className="h-3.5 w-3.5" />} />
@@ -128,9 +98,6 @@ export default function TicketPage() {
                 <Download className="h-4 w-4" />
                 Pobierz PDF
               </Button>
-              <Button variant="outline" size="icon" className="rounded-xl">
-                <Share2 className="h-4 w-4" />
-              </Button>
             </div>
           </div>
         </div>
@@ -140,7 +107,7 @@ export default function TicketPage() {
         </p>
       </main>
 
-      <BottomNav activeTab="" />
+      <BottomNav />
     </div>
   )
 }
