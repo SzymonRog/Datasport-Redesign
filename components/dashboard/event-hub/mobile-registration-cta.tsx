@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { getEventPriceDisplay } from "@/lib/mock-data"
 import type { EventHubEvent } from "./types"
 
 type MobileRegistrationCtaProps = {
@@ -22,7 +23,7 @@ export function MobileRegistrationCta({
         <div className="space-y-0.5">
           <p className="text-xs font-semibold text-muted-foreground">Pozostało {event.spotsLeft} z {totalSpots} miejsc</p>
           <p className="text-lg font-bold text-foreground">
-            {event.pricingTiers ? event.pricingTiers[0].amount : "Wkrótce"}
+            {getEventPriceDisplay(event.distances)}
           </p>
         </div>
         <div className="h-2 w-24 overflow-hidden rounded-full bg-muted">

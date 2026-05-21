@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { getEventPriceDisplay } from "@/lib/mock-data"
 import type { EventHubEvent, EventHubTab } from "./types"
 
 type SidebarRegistryProps = {
@@ -52,7 +53,7 @@ export function SidebarRegistry({
         <div className="rounded-xl bg-primary/5 dark:bg-primary/10 border border-primary/10 p-4">
           <p className="text-xs font-medium text-muted-foreground">Aktualne wpisowe</p>
           <p className="font-display text-2xl font-black text-foreground mt-1">
-            {event.pricingTiers ? event.pricingTiers[0].amount : "Wkrótce"}
+            {getEventPriceDisplay(event.distances)}
           </p>
         </div>
 

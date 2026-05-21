@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { getDistancePricingRates } from "@/lib/mock-data"
 import type { EventHubEvent } from "./types"
 
 type TabRegulationsProps = {
@@ -33,7 +34,7 @@ export function TabRegulations({ event }: TabRegulationsProps) {
               </thead>
               <tbody>
                 {event.distances.map((dist) => {
-                  const rates = getPricingRates(dist)
+                  const rates = getDistancePricingRates(dist)
 
                   return (
                     <tr key={dist} className="border-b border-border last:border-0 hover:bg-muted/10 transition-colors">
@@ -103,16 +104,3 @@ export function TabRegulations({ event }: TabRegulationsProps) {
   )
 }
 
-function getPricingRates(dist: string) {
-  const d = dist.toLowerCase()
-  if (d.includes("maraton") && !d.includes("pół")) {
-    return { early: "140 PLN", standard: "170 PLN", late: "200 PLN", office: "250 PLN" }
-  }
-  if (d.includes("półmaraton")) {
-    return { early: "100 PLN", standard: "120 PLN", late: "150 PLN", office: "190 PLN" }
-  }
-  if (d.includes("10") || d.includes("dycha")) {
-    return { early: "80 PLN", standard: "100 PLN", late: "120 PLN", office: "150 PLN" }
-  }
-  return { early: "70 PLN", standard: "90 PLN", late: "110 PLN", office: "140 PLN" }
-}

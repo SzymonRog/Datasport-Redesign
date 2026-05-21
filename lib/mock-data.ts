@@ -34,6 +34,13 @@ export type PricingTier = {
   amount: string
 }
 
+export type DistancePricingRates = {
+  early: string
+  standard: string
+  late: string
+  office: string
+}
+
 export type EventHubActionTier = "primary" | "secondary" | "utility"
 
 export type EventHubAction = {
@@ -75,34 +82,105 @@ export type UserRace = {
 
 // Pricing tiers — defined before mockEvents so they can be referenced inline
 export const mockMarathonPricing: PricingTier[] = [
-  { from: "2023-09-07", to: "2023-12-31", amount: "190.00 PLN" },
-  { from: "2024-01-01", to: "2024-02-28", amount: "220.00 PLN" },
-  { from: "2024-03-01", to: "2024-05-17", amount: "260.00 PLN" },
+  { from: "2025-09-07", to: "2025-12-31", amount: "140.00 PLN" },
+  { from: "2026-01-01", to: "2026-03-31", amount: "170.00 PLN" },
+  { from: "2026-04-01", to: "2026-05-15", amount: "200.00 PLN" },
 ]
 
 export const mockHalfMarathonPricing: PricingTier[] = [
-  { from: "2023-09-07", to: "2023-12-31", amount: "120.00 PLN" },
-  { from: "2024-01-01", to: "2024-02-28", amount: "140.00 PLN" },
-  { from: "2024-03-01", to: "2024-05-17", amount: "160.00 PLN" },
+  { from: "2025-09-07", to: "2025-12-31", amount: "100.00 PLN" },
+  { from: "2026-01-01", to: "2026-03-31", amount: "120.00 PLN" },
+  { from: "2026-04-01", to: "2026-05-15", amount: "150.00 PLN" },
 ]
 
 export const mockTenKmPricing: PricingTier[] = [
-  { from: "2023-09-07", to: "2023-12-31", amount: "80.00 PLN" },
-  { from: "2024-01-01", to: "2024-02-28", amount: "95.00 PLN" },
-  { from: "2024-03-01", to: "2024-05-17", amount: "110.00 PLN" },
+  { from: "2025-09-07", to: "2025-12-31", amount: "80.00 PLN" },
+  { from: "2026-01-01", to: "2026-03-31", amount: "100.00 PLN" },
+  { from: "2026-04-01", to: "2026-05-15", amount: "120.00 PLN" },
 ]
+
+// Canonical per-distance pricing rates (source of truth for all pricing UI)
+const pricingRatesMap: Record<string, DistancePricingRates> = {
+  marathon:     { early: "140 PLN", standard: "170 PLN", late: "200 PLN", office: "250 PLN" },
+  half:         { early: "100 PLN", standard: "120 PLN", late: "150 PLN", office: "190 PLN" },
+  "10km":       { early: "80 PLN",  standard: "100 PLN", late: "120 PLN", office: "150 PLN" },
+  "5km":        { early: "70 PLN",  standard: "90 PLN",  late: "110 PLN", office: "140 PLN" },
+  "15km":       { early: "80 PLN",  standard: "100 PLN", late: "120 PLN", office: "150 PLN" },
+  sprint:       { early: "90 PLN",  standard: "110 PLN", late: "130 PLN", office: "160 PLN" },
+  olympic:      { early: "120 PLN", standard: "140 PLN", late: "170 PLN", office: "210 PLN" },
+  triathlon:    { early: "130 PLN", standard: "160 PLN", late: "190 PLN", office: "230 PLN" },
+  "trail-short":{ early: "90 PLN",  standard: "110 PLN", late: "130 PLN", office: "160 PLN" },
+  "trail-long": { early: "120 PLN", standard: "150 PLN", late: "180 PLN", office: "220 PLN" },
+  "bike-short": { early: "80 PLN",  standard: "100 PLN", late: "120 PLN", office: "150 PLN" },
+  "bike-med":   { early: "110 PLN", standard: "130 PLN", late: "160 PLN", office: "200 PLN" },
+  "bike-long":  { early: "140 PLN", standard: "170 PLN", late: "200 PLN", office: "250 PLN" },
+}
+
+function classifyDistance(distance: string): string {
+  const d = distance.toLowerCase()
+
+  // Trail variants (must check before numeric checks)
+  if (d.includes("trail")) {
+    const km = parseInt(d, 10)
+    return km > 15 ? "trail-long" : "trail-short"
+  }
+
+  // Marathon / half-marathon by name
+  if (d.includes("maraton") && !d.includes("pół")) return "marathon"
+  if (d.includes("półmaraton")) return "half"
+
+  // Multisport
+  if (d === "sprint") return "sprint"
+  if (d === "olympic") return "olympic"
+  if (d.includes("triathlon") || d.includes("triatlon")) return "triathlon"
+
+  // Numeric distances
+  const km = parseInt(d, 10)
+  if (!isNaN(km)) {
+    if (km >= 100) return "bike-long"
+    if (km === 60) return "bike-med"
+    if (km === 42) return "marathon"
+    if (km === 30) return "bike-short"
+    if (km === 21) return "half"
+    if (km === 15) return "15km"
+    if (km === 10) return "10km"
+    if (km <= 5) return "5km"
+  }
+
+  if (d.includes("dycha")) return "10km"
+
+  return "10km"
+}
+
+export function getDistancePricingRates(distance: string): DistancePricingRates {
+  return pricingRatesMap[classifyDistance(distance)]
+}
 
 // Helper function to get pricing tiers based on distance
 export const getPricingForDistance = (distance: string): PricingTier[] => {
-  const lowerDistance = distance.toLowerCase()
-  if (lowerDistance.includes("maraton") && !lowerDistance.includes("pół")) {
+  const d = distance.toLowerCase()
+  if ((d.includes("maraton") && !d.includes("pół")) || d.includes("42")) {
     return mockMarathonPricing
-  } else if (lowerDistance.includes("półmaraton")) {
+  } else if (d.includes("półmaraton") || (d.includes("21") && d.includes("km"))) {
     return mockHalfMarathonPricing
-  } else if (lowerDistance.includes("10") || lowerDistance.includes("dycha")) {
+  } else if (d.includes("10") || d.includes("dycha")) {
     return mockTenKmPricing
   }
   return mockTenKmPricing
+}
+
+export function getEventPriceDisplay(distances: string[]): string {
+  const amounts = distances.map((d) => {
+    const rates = getDistancePricingRates(d)
+    return parseFloat(rates.early)
+  })
+
+  const unique = [...new Set(amounts)].sort((a, b) => a - b)
+
+  if (unique.length === 1) {
+    return `${unique[0]} PLN`
+  }
+  return `${unique[0]} – ${unique[unique.length - 1]} PLN`
 }
 
 // Single source of truth for all event data
