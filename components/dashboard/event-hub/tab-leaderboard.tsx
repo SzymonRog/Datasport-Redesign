@@ -16,7 +16,7 @@ export function TabLeaderboard({ showLeaderboards }: TabLeaderboardProps) {
               </h3>
               <p className="text-xs text-muted-foreground">Rywalizacja w treningach od momentu rejestracji na bieg</p>
             </div>
-            <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
+            <span className="inline-flex items-center rounded-md bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
               Live
             </span>
           </div>
@@ -60,7 +60,7 @@ export function TabLeaderboard({ showLeaderboards }: TabLeaderboardProps) {
           </div>
         </div>
       ) : (
-        <div className="rounded-2xl border border-border bg-card p-12 text-center space-y-3 shadow-sm">
+        <div className="rounded-xl border border-border bg-card p-12 text-center space-y-3 shadow-sm">
           <h4 className="text-base font-semibold text-foreground">
             Rywalizacja niedostępna
           </h4>
@@ -124,7 +124,7 @@ function LeaderboardCard({
   const styles = accentStyles[accentColor]
 
   return (
-    <div className="rounded-2xl border border-border bg-card shadow-sm overflow-hidden">
+    <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
       {/* Badge header */}
       <div className={`relative bg-gradient-to-br ${headerGradient} p-4 flex items-center gap-4 border-b border-border`}>
         <Image src={badgeImage} alt={badgeAlt} width={56} height={56} className="shrink-0 drop-shadow-md" />
@@ -136,7 +136,7 @@ function LeaderboardCard({
 
       <div className="p-4 space-y-2">
         {/* 1st Place */}
-        <div className={`flex items-center gap-3 rounded-xl ${styles.firstBg} border p-3`}>
+        <div className={`flex items-center gap-3 rounded-md ${styles.firstBg} border p-3`}>
           <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${styles.badge} text-xs font-black shadow-sm`}>1</span>
           <div className="min-w-0 flex-1">
             <p className="text-sm font-bold text-foreground">{first.name}</p>
@@ -145,7 +145,7 @@ function LeaderboardCard({
           <span className={`font-display text-base font-black ${styles.value} whitespace-nowrap`}>{first.value}<span className="text-[10px] font-semibold ml-0.5">{first.unit}</span></span>
         </div>
         {/* 2nd Place */}
-        <div className="flex items-center gap-3 rounded-xl p-3 hover:bg-muted/30 transition-colors">
+        <div className="flex items-center gap-3 rounded-md p-3 hover:bg-muted/30 transition-colors">
           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-bold text-muted-foreground">2</span>
           <div className="min-w-0 flex-1">
             <p className="text-sm font-medium text-foreground">{second.name}</p>

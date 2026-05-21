@@ -32,7 +32,7 @@ export function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
             >
               {TAB_LABELS[tab]}
               {isActive && (
-                <span className="absolute bottom-0 inset-x-0 h-0.5 bg-primary rounded-full" />
+                <span className="absolute bottom-0 inset-x-0 h-0.5 bg-primary" />
               )}
             </button>
           )

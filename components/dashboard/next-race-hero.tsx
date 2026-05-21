@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { Calendar, MapPin, Ticket, ArrowRight, Clock, Flame } from "lucide-react"
+import { Calendar, MapPin, Clock, Flame } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { mockUserRaces } from "@/lib/mock-data"
 
@@ -18,7 +18,7 @@ export function NextRaceHero() {
   const isImminent = nextRace.daysUntil <= 7
 
   return (
-    <section className="group relative overflow-hidden rounded-2xl bg-card shadow-lg ring-1 ring-border">
+    <section className="group relative overflow-hidden rounded-xl bg-card shadow-md ring-1 ring-border">
       {/* Background image — subtle */}
       <div className="absolute inset-0">
         <Image
@@ -37,7 +37,7 @@ export function NextRaceHero() {
             <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
               Twój następny start
             </p>
-            <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-bold ${
+            <span className={`inline-flex items-center gap-1.5 rounded-md px-2 py-0.5 text-xs font-bold ${
               isImminent
                 ? "bg-primary/10 text-primary"
                 : "bg-muted text-muted-foreground"
@@ -70,13 +70,13 @@ export function NextRaceHero() {
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2">
-            <span className="rounded-lg bg-muted px-2.5 py-1 text-xs font-bold text-muted-foreground">
+            <span className="rounded-md bg-muted px-2.5 py-1 text-xs font-bold text-muted-foreground">
               {nextRace.distance}
             </span>
-            <span className="rounded-lg bg-muted px-2.5 py-1 text-xs font-bold text-muted-foreground">
+            <span className="rounded-md bg-muted px-2.5 py-1 text-xs font-bold text-muted-foreground">
               {nextRace.category}
             </span>
-            <span className="rounded-lg bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">
+            <span className="rounded-md bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">
               Nr startowy: {nextRace.startNumber}
             </span>
           </div>
@@ -86,20 +86,16 @@ export function NextRaceHero() {
         <div className="flex flex-shrink-0 gap-3 sm:flex-col">
           <Button
             size="sm"
-            className="gap-2"
             onClick={() => router.push(`/bilet/${nextRace.id}`)}
           >
-            <Ticket className="h-4 w-4" />
             Pokaż bilet
           </Button>
           <Button
             variant="outline"
             size="sm"
-            className="gap-2"
             onClick={() => router.push(`/zawody/${nextRace.id}`)}
           >
             Szczegóły
-            <ArrowRight className="h-3.5 w-3.5" />
           </Button>
         </div>
       </div>

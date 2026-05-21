@@ -18,27 +18,27 @@ export function MobileRegistrationCta({
   onDemoAction,
 }: MobileRegistrationCtaProps) {
   return (
-    <div className="lg:hidden rounded-2xl border border-border bg-card p-5 shadow-lg space-y-4">
-      <div className="flex items-center justify-between">
+    <div className="lg:hidden rounded-xl border border-border bg-card p-5 shadow-md space-y-4">
+      <div className="flex items-center justify-between gap-4">
         <div className="space-y-0.5">
-          <p className="text-xs font-semibold text-muted-foreground">Pozostało {event.spotsLeft} z {totalSpots} miejsc</p>
-          <p className="text-lg font-bold text-foreground">
+          <p className="font-display text-xl font-black text-foreground">
             {getEventPriceDisplay(event.distances)}
           </p>
+          <p className="text-xs text-muted-foreground">
+            <span className="font-bold text-primary">{event.spotsLeft}</span>
+            {" "}wolnych z {totalSpots} miejsc
+          </p>
         </div>
-        <div className="h-2 w-24 overflow-hidden rounded-full bg-muted">
-          <div
-            className="h-full rounded-full bg-primary"
-            style={{ width: `${spotsPercent}%` }}
-          />
+        <div className="text-right shrink-0">
+          <p className="font-display text-2xl font-black text-foreground">{spotsPercent}<span className="text-sm font-semibold text-muted-foreground">%</span></p>
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">wolnych</p>
         </div>
       </div>
       <div className="flex gap-3">
-        <Button size="lg" className="flex-1 gap-2 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold" onClick={onRegister}>
-          Zarejestruj się
-          <span className="font-black">&rarr;</span>
+        <Button size="lg" className="flex-1 bg-primary hover:bg-primary/90 text-white font-bold" onClick={onRegister}>
+          Zarejestruj się &rarr;
         </Button>
-        <Button variant="outline" className="rounded-xl font-bold" onClick={onDemoAction}>
+        <Button variant="outline" className="font-bold" onClick={onDemoAction}>
           Grupowo
         </Button>
       </div>

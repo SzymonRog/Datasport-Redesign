@@ -1,9 +1,9 @@
-import { ArrowRight, CalendarPlus, MapPin, Trophy } from "lucide-react"
+import { CalendarPlus, Trophy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function QuickActions() {
   return (
-    <section className="overflow-hidden rounded-2xl bg-card">
+    <section className="overflow-hidden rounded-xl bg-card border border-border shadow-sm">
       <div className="grid gap-6 p-6 lg:grid-cols-2 lg:gap-8 lg:p-8">
         {/* Main CTA */}
         <div className="flex flex-col justify-center">
@@ -18,13 +18,10 @@ export function QuickActions() {
             Rejestracja na nowe biegi już otwarta.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Button size="lg" className="gap-2">
-              <CalendarPlus className="h-5 w-5" />
+            <Button size="lg">
               Zapisz się teraz
-              <ArrowRight className="h-4 w-4" />
             </Button>
-            <Button size="lg" variant="outline" className="gap-2">
-              <MapPin className="h-5 w-5" />
+            <Button size="lg" variant="outline">
               Znajdź zawody
             </Button>
           </div>
@@ -44,10 +41,10 @@ export function QuickActions() {
             value="11"
             trend="3 nadchodzące"
           />
-          <div className="col-span-2 rounded-xl bg-muted p-4">
+          <div className="col-span-2 rounded-md bg-muted p-4">
             <div className="mb-2 flex items-center justify-between">
               <span className="text-sm font-medium text-foreground">Następne zawody</span>
-              <span className="rounded-full bg-foreground px-2 py-0.5 text-xs font-medium text-background">
+              <span className="rounded-md bg-foreground px-2 py-0.5 text-xs font-medium text-background">
                 Za 17 dni
               </span>
             </div>
@@ -72,8 +69,8 @@ function QuickStatCard({
   trend: string
 }) {
   return (
-    <div className="rounded-xl border border-border bg-background p-4">
-      <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-muted text-foreground">
+    <div className="rounded-md border border-border bg-background p-4">
+      <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-sm bg-muted text-foreground">
         {icon}
       </div>
       <p className="text-2xl font-bold text-foreground">{value}</p>

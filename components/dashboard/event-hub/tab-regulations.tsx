@@ -10,7 +10,7 @@ export function TabRegulations({ event }: TabRegulationsProps) {
   return (
     <div className="space-y-6 animate-in fade-in-50 duration-200">
       {/* Multi-Dimensional Pricing Table Card */}
-      <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-sm">
+      <div className="rounded-xl border border-border bg-card overflow-hidden shadow-sm">
         <div className="border-b border-border bg-muted/30 px-6 py-4">
           <h3 className="text-base font-semibold text-foreground">
             Opłaty startowe
@@ -63,15 +63,15 @@ export function TabRegulations({ event }: TabRegulationsProps) {
       </div>
 
       {/* Rules Documents Downloads */}
-      <div className="rounded-2xl border border-border bg-card p-6 shadow-sm space-y-4">
+      <div className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4">
         <h3 className="text-base font-semibold text-foreground">
           Regulamin i Oświadczenia
         </h3>
 
         <div className="grid gap-3">
-          <div className="flex items-center justify-between p-3 rounded-xl border border-border bg-muted/20 hover:bg-muted/40 transition-colors">
+          <div className="flex items-center justify-between p-3 rounded-md border border-border bg-muted/20 hover:bg-muted/40 transition-colors">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary font-bold text-xs">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary font-bold text-xs">
                 PDF
               </div>
               <div>
@@ -79,14 +79,14 @@ export function TabRegulations({ event }: TabRegulationsProps) {
                 <p className="text-[11px] text-muted-foreground">PDF &bull; 420 KB</p>
               </div>
             </div>
-            <Button variant="outline" size="sm" className="rounded-lg text-xs shrink-0">
+            <Button variant="outline" size="sm" className="text-xs shrink-0">
               Pobierz
             </Button>
           </div>
 
-          <div className="flex items-center justify-between p-3 rounded-xl border border-border bg-muted/20 hover:bg-muted/40 transition-colors">
+          <div className="flex items-center justify-between p-3 rounded-md border border-border bg-muted/20 hover:bg-muted/40 transition-colors">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 font-bold text-xs">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 font-bold text-xs">
                 PDF
               </div>
               <div>
@@ -94,7 +94,7 @@ export function TabRegulations({ event }: TabRegulationsProps) {
                 <p className="text-[11px] text-muted-foreground">PDF &bull; 1.2 MB</p>
               </div>
             </div>
-            <Button variant="outline" size="sm" className="rounded-lg text-xs shrink-0">
+            <Button variant="outline" size="sm" className="text-xs shrink-0">
               Pobierz
             </Button>
           </div>

@@ -63,7 +63,7 @@ function NavItem({
   return (
     <Link
       href={href}
-      className={`flex flex-col items-center gap-0.5 transition-colors pointer-events-auto rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring p-1 hover:text-foreground ${active ? "text-foreground" : "text-muted-foreground"}`}
+      className={`flex flex-col items-center gap-0.5 transition-colors pointer-events-auto rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring p-1 hover:text-foreground ${active ? "text-foreground" : "text-muted-foreground"}`}
     >
       {icon}
       <span className="text-[10px] font-medium">{label}</span>

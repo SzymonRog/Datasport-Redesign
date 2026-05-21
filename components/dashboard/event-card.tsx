@@ -69,18 +69,23 @@ export function EventCard({ event, onSignUp }: EventCardProps) {
 
             {/* Distances + Participants + CTA */}
             <div className="mt-2.5 flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-                <div className="flex flex-wrap gap-1">
-                  {event.distances.map((distance) => (
+              <div className="flex min-w-0 items-center gap-2">
+                <div className="flex flex-nowrap gap-1 overflow-hidden">
+                  {event.distances.slice(0, 2).map((distance) => (
                     <span
                       key={distance}
-                      className="rounded-md bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground"
+                      className="rounded-md bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground whitespace-nowrap"
                     >
                       {distance}
                     </span>
                   ))}
+                  {event.distances.length > 2 && (
+                    <span className="rounded-md bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground whitespace-nowrap">
+                      +{event.distances.length - 2}
+                    </span>
+                  )}
                 </div>
-                <span className="hidden text-xs text-muted-foreground sm:inline">
+                <span className="hidden flex-shrink-0 text-xs text-muted-foreground sm:inline">
                   · {event.participants} os.
                 </span>
               </div>

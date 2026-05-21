@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Calendar, ChevronDown, Info, MapPin, Ticket, CreditCard, AlertCircle } from "lucide-react"
+import { Calendar, MapPin, CreditCard, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { mockUserRaces, type UserRace } from "@/lib/mock-data"
@@ -32,20 +32,10 @@ export function MyRaces() {
       {mockUserRaces.length > 2 && (
         <Button
           variant="ghost"
-          className="mt-4 w-full gap-2 text-muted-foreground hover:bg-muted hover:text-foreground"
+          className="mt-4 w-full text-muted-foreground hover:bg-muted hover:text-foreground"
           onClick={() => setShowAll(!showAll)}
         >
-          {showAll ? (
-            <>
-              Pokaż mniej
-              <ChevronDown className="h-4 w-4 rotate-180" />
-            </>
-          ) : (
-            <>
-              Pokaż wszystkie ({mockUserRaces.length})
-              <ChevronDown className="h-4 w-4" />
-            </>
-          )}
+          {showAll ? "Pokaż mniej" : `Pokaż wszystkie (${mockUserRaces.length})`}
         </Button>
       )}
     </section>
@@ -56,9 +46,9 @@ function MyRaceCard({ race }: { race: UserRace }) {
   const isPending = race.status === "pending_payment"
 
   return (
-    <article className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-md">
+    <article className="relative overflow-hidden rounded-xl border border-border bg-card shadow-sm">
       {/* Days Until Badge */}
-      <div className="absolute right-0 top-0 z-10 rounded-bl-xl bg-card/90 backdrop-blur-sm px-3 py-1.5 text-xs font-bold shadow-md ring-1 ring-border">
+      <div className="absolute right-0 top-0 z-10 rounded-bl-md bg-card/90 backdrop-blur-sm px-3 py-1.5 text-xs font-bold shadow-sm ring-1 ring-border">
         {race.daysUntil <= 30 ? (
           <span className="text-primary">Za {race.daysUntil} dni</span>
         ) : (
@@ -71,7 +61,7 @@ function MyRaceCard({ race }: { race: UserRace }) {
           {/* Race Info */}
           <div className="flex gap-4">
             {/* Cover Image */}
-            <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-muted shadow-md">
+            <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md bg-muted shadow-sm">
               <Image
                 src={race.cover}
                 alt={race.name}
@@ -94,17 +84,17 @@ function MyRaceCard({ race }: { race: UserRace }) {
                 </span>
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
-                <span className="rounded-lg bg-muted px-2 py-1 text-xs font-bold text-muted-foreground">
+                <span className="rounded-md bg-muted px-2 py-1 text-xs font-bold text-muted-foreground">
                   {race.distance}
                 </span>
-                <span className="rounded-lg bg-muted px-2 py-1 text-xs font-bold text-muted-foreground">
+                <span className="rounded-md bg-muted px-2 py-1 text-xs font-bold text-muted-foreground">
                   {race.category}
                 </span>
                 <span className="rounded-lg bg-primary/10 px-2 py-1 text-xs font-bold text-primary">
                   Nr: {race.startNumber}
                 </span>
                 {isPending && (
-                  <span className="flex items-center gap-1 rounded-lg bg-amber-100 dark:bg-amber-900/30 px-2 py-1 text-xs font-bold text-amber-700 dark:text-amber-400">
+                  <span className="flex items-center gap-1 rounded-md bg-amber-100 dark:bg-amber-900/30 px-2 py-1 text-xs font-bold text-amber-700 dark:text-amber-400">
                     <AlertCircle className="h-3 w-3" />
                     Oczekuje na płatność
                   </span>
@@ -127,18 +117,12 @@ function MyRaceCard({ race }: { race: UserRace }) {
               <span>Opłać teraz</span>
             </Button>
           ) : (
-            <Button variant="default" size="sm" className="gap-2" asChild>
-              <Link href={`/bilet/${race.id}`}>
-                <Ticket className="h-4 w-4" />
-                <span>Pokaż bilet</span>
-              </Link>
+            <Button variant="default" size="sm" asChild>
+              <Link href={`/bilet/${race.id}`}>Pokaż bilet</Link>
             </Button>
           )}
-          <Button variant="outline" size="sm" className="gap-2" asChild>
-            <Link href={`/zawody/${race.id}`}>
-              <Info className="h-4 w-4" />
-              <span>Szczegóły</span>
-            </Link>
+          <Button variant="outline" size="sm" asChild>
+            <Link href={`/zawody/${race.id}`}>Szczegóły</Link>
           </Button>
         </div>
       </div>

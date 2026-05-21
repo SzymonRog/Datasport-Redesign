@@ -8,7 +8,7 @@ type HeroCoverProps = {
 
 export function HeroCover({ event }: HeroCoverProps) {
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-border/80 bg-zinc-950 text-white shadow-xl">
+    <div className="relative overflow-hidden rounded-xl border border-border/80 bg-zinc-950 text-white shadow-xl">
       {/* Dynamic mesh gradient background overlay */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(220,38,38,0.25),transparent_60%)] z-10" />
       <div className="absolute inset-0 bg-linear-to-t from-zinc-950 via-zinc-950/60 to-zinc-950/10 z-10" />

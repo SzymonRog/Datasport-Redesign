@@ -33,8 +33,8 @@ export function StatsOverview() {
       </div>
 
       <div className="space-y-3 p-4">
-        <div className="flex items-center gap-4 rounded-xl bg-muted/50 p-4 transition-colors hover:bg-muted ring-1 ring-border">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+        <div className="flex items-center gap-4 rounded-md bg-muted/50 p-4 transition-colors hover:bg-muted ring-1 ring-border">
+          <div className="flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary">
             <Trophy className="h-6 w-6" />
           </div>
           <div>
@@ -43,8 +43,8 @@ export function StatsOverview() {
           </div>
         </div>
 
-        <div className="flex items-center gap-4 rounded-xl bg-muted/50 p-4 transition-colors hover:bg-muted ring-1 ring-border">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+        <div className="flex items-center gap-4 rounded-md bg-muted/50 p-4 transition-colors hover:bg-muted ring-1 ring-border">
+          <div className="flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary">
             <Timer className="h-6 w-6" />
           </div>
           <div>
@@ -71,7 +71,7 @@ function StatRow({
   return (
     <div className="flex items-center justify-between p-4">
       <div className="flex items-center gap-3">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+        <div className="flex h-8 w-8 items-center justify-center rounded-sm bg-muted text-muted-foreground">
           {icon}
         </div>
         <span className="text-sm text-muted-foreground">{label}</span>

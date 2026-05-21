@@ -44,7 +44,7 @@ export function PromotedEvents() {
             variant="ghost"
             size="icon"
             onClick={scrollPrev}
-            className="h-8 w-8 rounded-full bg-muted/50"
+            className="h-8 w-8 rounded-md bg-muted/50"
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
@@ -52,7 +52,7 @@ export function PromotedEvents() {
             variant="ghost"
             size="icon"
             onClick={scrollNext}
-            className="h-8 w-8 rounded-full bg-muted/50"
+            className="h-8 w-8 rounded-md bg-muted/50"
           >
             <ChevronRight className="h-4 w-4" />
           </Button>
@@ -76,7 +76,7 @@ function PromotedEventCard({ event }: { event: Event }) {
   const badge = getTopRecommendationBadge(event)
 
   return (
-    <article className="group flex w-[260px] flex-shrink-0 cursor-pointer flex-col overflow-hidden rounded-2xl bg-card shadow-lg ring-1 ring-border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <article className="group flex w-[260px] flex-shrink-0 cursor-pointer flex-col overflow-hidden rounded-xl bg-card shadow-md ring-1 ring-border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
       <div className="relative aspect-[4/3] overflow-hidden bg-muted">
         <Image
           src={event.image}

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronRight, Heart, MessageCircle, Share2 } from "lucide-react"
+import { Heart, MessageCircle, Share2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const activities = [
@@ -47,9 +47,8 @@ export function RecentActivity() {
           <h2 className="text-xl font-semibold text-foreground">Aktualności</h2>
           <p className="text-sm text-muted-foreground">Ostatnie wydarzenia ze społeczności</p>
         </div>
-        <Button variant="ghost" className="gap-1 text-sm text-primary">
+        <Button variant="ghost" className="text-sm text-primary">
           Zobacz wszystkie
-          <ChevronRight className="h-4 w-4" />
         </Button>
       </div>
 
@@ -88,7 +87,7 @@ function TabButton({
   return (
     <button
       onClick={onClick}
-      className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+      className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
         active
           ? "bg-primary text-primary-foreground"
           : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
@@ -101,7 +100,7 @@ function TabButton({
 
 function ActivityCard({ activity }: { activity: typeof activities[0] }) {
   return (
-    <article className="overflow-hidden rounded-xl border border-border bg-card shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+    <article className="overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
       <div className="p-5">
         <div className="mb-3 flex items-start justify-between">
           <div className="flex items-center gap-3">

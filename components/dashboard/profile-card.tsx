@@ -1,9 +1,9 @@
-import { Edit, MapPin, User } from "lucide-react"
+import { User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function ProfileCard() {
   return (
-    <div className="glass-panel overflow-hidden rounded-2xl">
+    <div className="glass-panel overflow-hidden rounded-xl">
       {/* Cover Image/Pattern */}
       <div className="h-24 bg-gradient-to-r from-red-600 to-red-400" />
       
@@ -15,10 +15,7 @@ export function ProfileCard() {
 
         {/* Info */}
         <h2 className="text-xl font-semibold text-foreground leading-tight">Szymon Rogala</h2>
-        <p className="mt-1 flex items-center justify-center gap-1 text-sm font-medium text-muted-foreground">
-          <MapPin className="h-3 w-3" />
-          Wielka Lipa
-        </p>
+        <p className="mt-1 text-sm font-medium text-muted-foreground">Wielka Lipa</p>
 
         <div className="mt-6 grid grid-cols-3 gap-3">
           <StatItem label="Treningi GPS" value="0" />
@@ -26,7 +23,7 @@ export function ProfileCard() {
           <StatItem label="Wyniki" value="6" />
         </div>
 
-        <Button variant="outline" className="mt-6 w-full rounded-xl">
+        <Button variant="outline" className="mt-6 w-full">
           Zobacz profil
         </Button>
       </div>
@@ -36,7 +33,7 @@ export function ProfileCard() {
 
 function StatItem({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
-    <div className={`rounded-xl p-3 text-center transition-colors ${highlight ? "bg-primary/10 ring-1 ring-primary/20" : "bg-muted/50 hover:bg-muted ring-1 ring-border"}`}>
+    <div className={`rounded-md p-3 text-center transition-colors ${highlight ? "bg-primary/10 ring-1 ring-primary/20" : "bg-muted/50 hover:bg-muted ring-1 ring-border"}`}>
       <p className={`text-xl font-bold ${highlight ? "text-primary" : "text-foreground"}`}>
         {value}
       </p>

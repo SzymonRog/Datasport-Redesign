@@ -9,7 +9,7 @@ type TabParticipantsProps = {
 export function TabParticipants({ event }: TabParticipantsProps) {
   return (
     <div className="space-y-6 animate-in fade-in-50 duration-200">
-      <div className="rounded-2xl border border-border bg-card p-5 sm:p-8 shadow-sm space-y-6">
+      <div className="rounded-xl border border-border bg-card p-5 sm:p-8 shadow-sm space-y-6">
         <div className="space-y-2 max-w-lg mx-auto text-center">
           <h3 className="text-xl font-bold text-foreground">
             Lista startowa
@@ -20,7 +20,7 @@ export function TabParticipants({ event }: TabParticipantsProps) {
         </div>
 
         <div className="flex items-center justify-center">
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-0 rounded-xl bg-muted/50 border border-border p-4 sm:px-6 sm:py-3 mx-auto w-full sm:w-auto sm:inline-flex">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-0 rounded-md bg-muted/50 border border-border p-4 sm:px-6 sm:py-3 mx-auto w-full sm:w-auto sm:inline-flex">
             <div className="text-center sm:text-left">
               <p className="text-xs text-muted-foreground">Zapisani</p>
               <p className="text-lg font-bold text-foreground">
@@ -39,7 +39,7 @@ export function TabParticipants({ event }: TabParticipantsProps) {
         </div>
 
         <div className="text-center">
-          <Button size="lg" className="w-full sm:w-auto rounded-xl bg-primary hover:bg-primary/90 text-white px-8 gap-2 font-bold" asChild>
+          <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white px-8 gap-2 font-bold" asChild>
             <a href="https://wyniki.datasport.pl" target="_blank" rel="noopener noreferrer">
               <ExternalLink className="h-4 w-4" />
               Otwórz listę na Datasport
