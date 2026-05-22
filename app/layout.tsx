@@ -1,17 +1,29 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Outfit } from 'next/font/google'
+import localFont from 'next/font/local'
+import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/dashboard/theme-provider'
 import './globals.css'
 
-const inter = Inter({ 
-  subsets: ["latin"],
-  variable: '--font-inter'
+const satoshi = localFont({
+  src: [
+    { path: '../public/fonts/Satoshi-Light.otf', weight: '300', style: 'normal' },
+    { path: '../public/fonts/Satoshi-LightItalic.otf', weight: '300', style: 'italic' },
+    { path: '../public/fonts/Satoshi-Regular.otf', weight: '400', style: 'normal' },
+    { path: '../public/fonts/Satoshi-Italic.otf', weight: '400', style: 'italic' },
+    { path: '../public/fonts/Satoshi-Medium.otf', weight: '500', style: 'normal' },
+    { path: '../public/fonts/Satoshi-MediumItalic.otf', weight: '500', style: 'italic' },
+    { path: '../public/fonts/Satoshi-Bold.otf', weight: '700', style: 'normal' },
+    { path: '../public/fonts/Satoshi-BoldItalic.otf', weight: '700', style: 'italic' },
+    { path: '../public/fonts/Satoshi-Black.otf', weight: '900', style: 'normal' },
+    { path: '../public/fonts/Satoshi-BlackItalic.otf', weight: '900', style: 'italic' },
+  ],
+  variable: '--font-satoshi',
 });
 
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: '--font-outfit'
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
 });
 
 export const metadata: Metadata = {
@@ -30,7 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl" className="bg-background" suppressHydrationWarning>
-      <body className={`${inter.variable} ${outfit.variable} font-sans antialiased`}>
+      <body className={`${satoshi.variable} ${inter.variable} font-sans antialiased`}>
         <ThemeProvider>
           {children}
         </ThemeProvider>
